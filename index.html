@@ -1,1 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>F.R.I.E.N.D. TC-52 Executive Mock</title>
 
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;font-family:Arial,Helvetica,sans-serif;background:#07111f;color:white;overflow:hidden}
+body{display:flex;align-items:center;justify-content:center}
+
+.app{
+width:100vw;
+height:100vh;
+max-width:430px;
+max-height:860px;
+background:linear-gradient(180deg,#052b57,#001327);
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
+
+.header{
+height:82px;
+display:flex;
+align-items:center;
+gap:10px;
+padding:8px 10px;
+background:linear-gradient(90deg,#003f7d,#0067c5);
+border-bottom:4px solid #ffd200;
+}
+
+.logoBox{
+width:92px;
+height:54px;
+background:white;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:5px;
+}
+
+.logoBox img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+}
+
+.title{flex:1}
+.title h1{font-size:22px;margin:0;color:white;letter-spacing:.5px}
+.title p{font-size:11px;margin:2px 0 0;color:#e8f5ff}
+
+.store{
+font-size:12px;
+font-weight:800;
+background:rgba(0,0,0,.25);
+padding:8px;
+border-radius:10px;
+text-align:center;
+}
+
+.userBar{
+display:grid;
+grid-template-columns:1fr auto;
+gap:8px;
+padding:9px 10px;
+background:#001a33;
+border-bottom:1px solid rgba(255,255,255,.14);
+}
+
+.userCard{
+background:rgba(255,255,255,.09);
+border:1px solid rgba(255,255,255,.18);
+border-radius:14px;
+padding:8px 10px;
+}
+
+.userCard small{
+display:block;
+font-size:10px;
+color:#ffd200;
+font-weight:800;
+}
+
+.userCard strong{
+font-size:17px;
+}
+
+.switchBtn{
+background:#d71920;
+color:white;
+border:none;
+border-radius:14px;
+padding:0 12px;
+font-weight:900;
+font-size:12px;
+}
+
+.metrics{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+padding:9px 10px;
+}
+
+.metric{
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.16);
+border-radius:14px;
+padding:7px 4px;
+text-align:center;
+}
+
+.metric .num{
+font-size:21px;
+font-weight:900;
+color:#9cffb1;
+}
+
+.metric .label{
+font-size:10px;
+color:#e8f5ff;
+}
+
+.missionArea{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:6px 10px;
+min-height:0;
+}
+
+.circle{
+width:min(72vw,310px);
+height:min(72vw,310px);
+max-width:310px;
+max-height:310px;
+border-radius:50%;
+background:radial-gradient(circle at center,#ff3b3b 0%,#c9151b 48%,#730005 100%);
+border:4px solid #ffd200;
+box-shadow:0 0 24px rgba(255,0,0,.35), inset 0 0 35px rgba(0,0,0,.35);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:24px;
+}
+
+.circle h2{
+margin:0;
+font-size:23px;
+line-height:1.05;
+color:#fff;
+text-transform:uppercase;
+}
+
+.circle h3{
+margin:7px 0 6px;
+font-size:15px;
+color:#ffd200;
+text-transform:uppercase;
+}
+
+.circle p{
+margin:0;
+font-size:13px;
+line-height:1.3;
+}
+
+.buttons{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+padding:9px 10px 10px;
+}
+
+button{
+cursor:pointer;
+border:none;
+border-radius:15px;
+font-weight:900;
+box-shadow:0 4px 0 rgba(0,0,0,.3);
+}
+
+button:active{
+transform:translateY(2px);
+box-shadow:0 2px 0 rgba(0,0,0,.3);
+}
+
+.navBtn{
+min-height:51px;
+background:linear-gradient(180deg,#0878d8,#004d91);
+color:white;
+font-size:12px;
+}
+
+.navBtn.gold{
+background:linear-gradient(180deg,#ffd200,#c99700);
+color:#061225;
+}
+
+.navBtn.red{
+background:linear-gradient(180deg,#ef343c,#a40008);
+color:white;
+}
+
+.panel{
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,#042b55,#000d1d);
+z-index:10;
+display:none;
+flex-direction:column;
+}
+
+.panel.show{display:flex}
+
+.panelHeader{
+height:76px;
+background:linear-gradient(90deg,#003f7d,#0067c5);
+border-bottom:4px solid #ffd200;
+display:flex;
+align-items:center;
+padding:10px;
+gap:10px;
+}
+
+.panelHeader h2{
+margin:0;
+font-size:20px;
+color:white;
+}
+
+.panelBody{
+padding:12px;
+overflow:auto;
+flex:1;
+}
+
+.card{
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.18);
+border-radius:16px;
+padding:11px;
+margin-bottom:9px;
+}
+
+.card strong{
+color:#9cffb1;
+}
+
+.card h3{
+margin:0 0 6px;
+color:#ffd200;
+font-size:16px;
+}
+
+.progress{
+height:12px;
+background:rgba(255,255,255,.14);
+border-radius:20px;
+overflow:hidden;
+margin-top:6px;
+}
+
+.bar{
+height:100%;
+background:#9cffb1;
+width:90%;
+}
+
+.backBtn{
+margin:10px 12px 14px;
+min-height:48px;
+background:#d71920;
+color:white;
+font-size:14px;
+}
+
+.choiceBtn{
+width:100%;
+min-height:48px;
+margin:6px 0;
+background:#0067c5;
+color:white;
+font-size:14px;
+}
+
+.footer{
+text-align:center;
+font-size:10px;
+color:#cce9ff;
+padding-bottom:4px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+<div class="logoBox">
+<img src="king-soopers-logo.png" alt="King Soopers Logo">
+</div>
+<div class="title">
+<h1>F.R.I.E.N.D.</h1>
+<p>Fresh Retail Intelligence Engine for Next Decisions</p>
+</div>
+<div class="store">Store<br>#129</div>
+</header>
+
+<section class="userBar">
+<div class="userCard">
+<small>CURRENT USER</small>
+<strong id="userName">Alex — Associate</strong>
+</div>
+<button class="switchBtn" onclick="switchUser()">SWITCH<br>USER</button>
+</section>
+
+<section class="metrics">
+<div class="metric">
+<div class="num" id="m1">98</div>
+<div class="label">Dept Health</div>
+</div>
+<div class="metric">
+<div class="num" id="m2">96%</div>
+<div class="label">Food Safety</div>
+</div>
+<div class="metric">
+<div class="num" id="m3">94%</div>
+<div class="label">Mission</div>
+</div>
+</section>
+
+<section class="missionArea">
+<div class="circle">
+<h2>F.R.I.E.N.D.</h2>
+<h3>Guided Mission</h3>
+<p id="missionText">
+Alex, complete Fresh Start, review Deli priorities, then begin Hot Holding temperatures with guided support.
+</p>
+</div>
+</section>
+
+<section class="buttons">
+<button class="navBtn gold" onclick="openPanel('fresh')">Fresh<br>Start</button>
+<button class="navBtn" onclick="openPanel('temp')">Temperature</button>
+<button class="navBtn" onclick="openPanel('production')">Production</button>
+<button class="navBtn" onclick="openPanel('replenish')">Replenish</button>
+<button class="navBtn red" onclick="openPanel('order')">Order</button>
+<button class="navBtn" onclick="openPanel('leader')">Leader</button>
+<button class="navBtn" onclick="openPanel('training')">Training</button>
+<button class="navBtn red" onclick="openPanel('alerts')">Alerts</button>
+<button class="navBtn gold" onclick="openPanel('mission')">Mission</button>
+</section>
+
+<div class="footer">Executive TC-52 Concept Model</div>
+
+</div>
+
+<div id="panel" class="panel">
+<div class="panelHeader">
+<div class="logoBox">
+<img src="king-soopers-logo.png" alt="King Soopers Logo">
+</div>
+<h2 id="panelTitle">Panel</h2>
+</div>
+<div class="panelBody" id="panelBody"></div>
+<button class="backBtn" onclick="closePanel()">BACK TO DASHBOARD</button>
+</div>
+
+<script>
+const users=[
+{
+name:"Alex — Associate",
+m1:"98",
+m2:"96%",
+m3:"94%",
+mission:"Alex, complete Fresh Start, review Deli priorities, then begin Hot Holding temperatures with guided support."
+},
+{
+name:"Jamie — Deli Leader",
+m1:"97",
+m2:"98%",
+m3:"91%",
+mission:"Jamie, verify Alex has completed Fresh Start, observe Hot Holding temperatures, coach in the moment, and confirm completion."
+},
+{
+name:"Joey — Store Leader",
+m1:"96",
+m2:"97%",
+m3:"93%",
+mission:"Joey, review Deli execution, confirm leader support, monitor alerts, and validate department readiness before peak traffic."
+}
+];
+
+let currentUser=0;
+
+function switchUser(){
+currentUser=(currentUser+1)%users.length;
+const u=users[currentUser];
+document.getElementById("userName").textContent=u.name;
+document.getElementById("m1").textContent=u.m1;
+document.getElementById("m2").textContent=u.m2;
+document.getElementById("m3").textContent=u.m3;
+document.getElementById("missionText").textContent=u.mission;
+}
+
+const panels={
+
+fresh:{
+title:"Fresh Start",
+body:`
+<div class="card">
+<h3>Daily Readiness</h3>
+<strong>Associate:</strong> Alex<br>
+<strong>Department:</strong> Deli / Fresh Prepared<br>
+<strong>Status:</strong> Fresh Start Ready
+<div class="progress"><div class="bar" style="width:98%"></div></div>
+</div>
+
+<div class="card">
+<h3>Guided Steps</h3>
+1. Review food safety expectations.<br>
+2. Review today’s department priorities.<br>
+3. Confirm clean hands, clean tools, and clean workspace.<br>
+4. Begin assigned temperature mission.
+</div>
+
+<div class="card">
+<h3>Leader Visibility</h3>
+Jamie can see Alex’s completion status and receives a coaching prompt when Alex begins temperatures.
+</div>`
+},
+
+temp:{
+title:"Temperature Guidance",
+body:`
+<div class="card">
+<h3>Hot Holding Mission</h3>
+<strong>Prompt:</strong> Check all hot holding items and record temperatures before peak lunch period.
+</div>
+
+<div class="card">
+<h3>Step-by-Step Workflow</h3>
+1. Select hot holding item.<br>
+2. Take temperature.<br>
+3. Enter result.<br>
+4. If below standard, F.R.I.E.N.D. opens corrective action.<br>
+5. Notify Jamie if correction is required.
+</div>
+
+<div class="card">
+<h3>Current Results</h3>
+Hot Holding Compliance: <strong>96%</strong><br>
+Cold Holding Compliance: <strong>98%</strong><br>
+Corrective Actions Open: <strong>0 Critical</strong>
+</div>`
+},
+
+production:{
+title:"Production",
+body:`
+<div class="card">
+<h3>Production Intelligence</h3>
+F.R.I.E.N.D. compares sales forecast, current inventory, shrink risk, and time of day.
+</div>
+
+<div class="card">
+<h3>Suggested Production</h3>
+Chicken Tenders: <strong>Small Batch</strong><br>
+Mac & Cheese: <strong>Hold Production</strong><br>
+Rotisserie: <strong>Prepare Next Run</strong>
+</div>
+
+<div class="card">
+<h3>Business Impact</h3>
+Expected Freshness Improvement: <strong>+12%</strong><br>
+Expected Waste Reduction: <strong>-8%</strong>
+</div>`
+},
+
+replenish:{
+title:"Replenishment",
+body:`
+<div class="card">
+<h3>Priority Recovery</h3>
+F.R.I.E.N.D. identifies high-impact holes and assigns the best next replenishment action.
+</div>
+
+<div class="card">
+<h3>Top Priorities</h3>
+1. Meal solution display — high customer impact.<br>
+2. Grab-and-go case — sales opportunity.<br>
+3. Service case backup — peak readiness.
+</div>
+
+<div class="card">
+<h3>Projected Result</h3>
+Recovered Sales Opportunity: <strong>$420 Today</strong><br>
+Customer Experience Risk: <strong>Reduced</strong>
+</div>`
+},
+
+order:{
+title:"Order Support",
+body:`
+<div class="card">
+<h3>Leader Review Required</h3>
+F.R.I.E.N.D. provides recommendations. Final order decisions remain with the human leader.
+</div>
+
+<div class="card">
+<h3>Suggested Adjustments</h3>
+Increase: high-velocity lunch items.<br>
+Hold: slow-moving prepared sides.<br>
+Review: weekend demand and ad activity.
+</div>
+
+<div class="card">
+<h3>Why It Matters</h3>
+Improves in-stock position while protecting shrink and freshness.
+</div>`
+},
+
+leader:{
+title:"Leader Mode",
+body:`
+<div class="card">
+<h3>Select Leadership View</h3>
+<button class="choiceBtn" onclick="leaderView('department')">Jamie — Deli Leader</button>
+<button class="choiceBtn" onclick="leaderView('store')">Joey — Store Leader</button>
+</div>
+
+<div class="card" id="leaderResult">
+<strong>Choose a leader view</strong> to display the correct dashboard.
+</div>`
+},
+
+training:{
+title:"Training",
+body:`
+<div class="card">
+<h3>Training Support</h3>
+F.R.I.E.N.D. turns daily work into guided learning and consistent coaching.
+</div>
+
+<div class="card">
+<h3>Alex Training Path</h3>
+Fresh Start: <strong>Complete</strong><br>
+Temperature Basics: <strong>In Progress</strong><br>
+Production Standards: <strong>Next</strong>
+</div>
+
+<div class="card">
+<h3>Leader Coaching</h3>
+Jamie receives prompts to observe, coach, verify, and document support.
+</div>`
+},
+
+alerts:{
+title:"Alerts",
+body:`
+<div class="card">
+<h3>Current Alerts</h3>
+Food Safety: <strong>No Critical Alerts</strong><br>
+Staffing: <strong>Lunch Coverage Watch</strong><br>
+Replenishment: <strong>2 Priority Opportunities</strong>
+</div>
+
+<div class="card">
+<h3>Escalation Logic</h3>
+Critical alerts go to the department leader first, then store leadership if unresolved.
+</div>
+
+<div class="card">
+<h3>Executive Value</h3>
+Problems are surfaced early, prioritized clearly, and connected to action.
+</div>`
+},
+
+mission:{
+title:"Mission Board",
+body:`
+<div class="card">
+<h3>Current Guided Mission</h3>
+Alex completes Fresh Start, performs Hot Holding temperatures, and receives support from Jamie.
+</div>
+
+<div class="card">
+<h3>Mission Chain</h3>
+Associate Action → Leader Coaching → Store Visibility → Better Execution
+</div>
+
+<div class="card">
+<h3>Expected Outcome</h3>
+Higher consistency, stronger food safety, better training, reduced leader follow-up time.
+</div>`
+}
+};
+
+function openPanel(type){
+document.getElementById("panelTitle").textContent=panels[type].title;
+document.getElementById("panelBody").innerHTML=panels[type].body;
+document.getElementById("panel").classList.add("show");
+}
+
+function closePanel(){
+document.getElementById("panel").classList.remove("show");
+}
+
+function leaderView(type){
+let box=document.getElementById("leaderResult");
+if(type==="department"){
+box.innerHTML=`
+<h3>Jamie — Deli Leader</h3>
+<strong>View:</strong> Department execution<br>
+<strong>Alex:</strong> Fresh Start complete<br>
+<strong>Next Action:</strong> Observe Hot Holding temperatures<br>
+<strong>Coaching Prompt:</strong> Reinforce correct thermometer process<br>
+<strong>Mission Status:</strong> On Track
+`;
+}else{
+box.innerHTML=`
+<h3>Joey — Store Leader</h3>
+<strong>View:</strong> Store execution health<br>
+<strong>Deli Status:</strong> 98 Department Health<br>
+<strong>Leader Support:</strong> Jamie active<br>
+<strong>Risk:</strong> Lunch coverage watch<br>
+<strong>Priority:</strong> Validate peak readiness
+`;
+}
+}
+</script>
+
+</body>
+</html>
